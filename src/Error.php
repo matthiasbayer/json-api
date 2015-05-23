@@ -11,7 +11,7 @@ use Bayer\JsonApi\Error\Source;
  */
 class Error
 {
-    use MetaObject;
+    use MetaTrait;
 
     /**
      * A unique identifier for this particular occurrence of the problem.

@@ -1,7 +1,9 @@
 <?php
 
 namespace Bayer\JsonApi;
+
 use Bayer\JsonApi\Resource\ResourceIdentifier;
+use Bayer\JsonApi\Link\LinkTrait;
 
 /**
  * Class Relationship
@@ -11,8 +13,8 @@ use Bayer\JsonApi\Resource\ResourceIdentifier;
  */
 class Relationship
 {
-    use MetaObject;
-    use LinkObject;
+    use MetaTrait;
+    use LinkTrait;
 
     /**
      * @var ResourceIdentifier|ResourceIdentifier[]|null

@@ -3,8 +3,8 @@
 namespace Bayer\JsonApi\Document;
 
 use Bayer\JsonApi\Error;
-use Bayer\JsonApi\LinkObject;
-use Bayer\JsonApi\MetaObject;
+use Bayer\JsonApi\Link\LinkTrait;
+use Bayer\JsonApi\MetaTrait;
 
 /**
  * Class Document
@@ -14,8 +14,8 @@ use Bayer\JsonApi\MetaObject;
  */
 abstract class AbstractDocument
 {
-    use MetaObject;
-    use LinkObject;
+    use MetaTrait;
+    use LinkTrait;
 
     /**
      * Related resources along with the requested primary resources
@@ -68,4 +68,23 @@ abstract class AbstractDocument
     {
         $this->setErrors(null);
     }
+
+    /**
+     * Get primary data
+     *
+     * @return mixed
+     */
+    abstract public function getData();
+
+    /**
+     * Set primary data
+     *
+     * @param $data
+     */
+    abstract public function setData($data);
+
+    /**
+     * Clear primary data
+     */
+    abstract public function clearData();
 }

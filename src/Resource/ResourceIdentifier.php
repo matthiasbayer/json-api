@@ -1,7 +1,7 @@
 <?php
 
 namespace Bayer\JsonApi\Resource;
-use Bayer\JsonApi\MetaObject;
+use Bayer\JsonApi\MetaTrait;
 
 /**
  * Class ResourceIdentifier
@@ -11,7 +11,7 @@ use Bayer\JsonApi\MetaObject;
  */
 class ResourceIdentifier
 {
-    use MetaObject;
+    use MetaTrait;
 
     /**
      * @var string

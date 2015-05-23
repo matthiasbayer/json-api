@@ -1,29 +1,20 @@
 <?php
 
-namespace Bayer\JsonApi;
+namespace Bayer\JsonApi\Link;
 
-trait LinkObject
+trait LinkTrait
 {
     /**
-     * @var array|null
+     * @var string[]|LinkObject[]|null
      */
     protected $links;
 
     /**
-     * @param string|null $name
-     * @return array|null
+     * @return string[]|LinkObject[]|null
      */
-    public function getLinks($name = null)
+    public function getLinks()
     {
-        if (null === $name) {
-            return $this->links;
-        }
-
-        if (isset($this->links[$name])) {
-            return $this->links[$name];
-        }
-
-        return null;
+        return $this->links;
     }
 
     /**
@@ -44,12 +35,29 @@ trait LinkObject
 
     /**
      * @param string $name
-     * @param mixed $value
+     * @return LinkObject|string|null
+     */
+    public function getLink($name)
+    {
+        if (isset($this->links[$name])) {
+            return $this->links[$name];
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string $name
+     * @param string|LinkObject $value
      */
     public function addLink($name, $value)
     {
         if (!in_array($name, array('self', 'related', 'prev', 'next', 'first', 'last'))) {
             throw new \InvalidArgumentException("Link name must be self, related, prev, next, first or last");
+        }
+
+        if (!is_string($value) && !$value instanceof LinkObject) {
+            throw new \InvalidArgumentException("Link value must be either string or LinkObject");
         }
 
         $this->links[$name] = $value;

@@ -48,7 +48,7 @@ class ResourceDocument extends AbstractDocument
      */
     public function setData($data)
     {
-        // A document containig data must not have errors
+        // A document containing data must not have errors
         if (null !== $data) {
             $this->clearErrors();
         }

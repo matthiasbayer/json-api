@@ -2,7 +2,7 @@
 
 namespace Bayer\JsonApi;
 
-trait MetaObject
+trait MetaTrait
 {
     /**
      * @var array|null
