@@ -18,6 +18,11 @@ abstract class AbstractDocument
     use LinkTrait;
 
     /**
+     * @var mixed
+     */
+    protected $data;
+
+    /**
      * Related resources along with the requested primary resources
      *
      * @var array|null
