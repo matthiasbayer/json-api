@@ -1,0 +1,22 @@
+{
+    "name": "matthiasbayer/json-api",
+    "description": "Framework agnostic php implementation of the latest jsonapi.org version",
+    "keywords": ["json-api", "jsonapi", "jsonapi.org", "json", "api"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Bayer",
+            "email": "thematthiasbayer@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bayer\\JsonApi\\": "src/"
+        }
+    }
+}
