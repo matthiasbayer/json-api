@@ -5,6 +5,7 @@ namespace Bayer\JsonApi\Document;
 use Bayer\JsonApi\Error;
 use Bayer\JsonApi\Link\LinkTrait;
 use Bayer\JsonApi\MetaTrait;
+use Bayer\JsonApi\Resource\ResourceObject;
 
 /**
  * Class Document
@@ -25,7 +26,7 @@ abstract class AbstractDocument
     /**
      * Related resources along with the requested primary resources
      *
-     * @var array|null
+     * @var ResourceObject[]|null
      */
     protected $included;
 
@@ -35,7 +36,7 @@ abstract class AbstractDocument
     protected $errors;
 
     /**
-     * @return array|null
+     * @return ResourceObject[]|null
      */
     public function getIncluded()
     {
@@ -43,11 +44,53 @@ abstract class AbstractDocument
     }
 
     /**
-     * @param array|null $included
+     * @param ResourceObject[]|null $included
      */
-    public function setIncluded($included)
+    public function setIncluded(array $included = null)
     {
-        $this->included = $included;
+        $this->included = null;
+
+        foreach ($included as $resource) {
+            $this->addIncluded($resource);
+        }
+    }
+
+    /**
+     * @param ResourceObject $included
+     */
+    public function addIncluded(ResourceObject $included)
+    {
+        if (!is_array($this->included)) {
+            $this->included = array();
+        }
+
+        $this->included[] = $included;
+    }
+
+    /**
+     * @param ResourceObject $included
+     * @return bool
+     */
+    public function hasIncluded(ResourceObject $included)
+    {
+        return in_array($included, $this->included);
+    }
+
+    /**
+     * @param ResourceObject $included
+     * @return bool
+     */
+    public function removeIncluded(ResourceObject $included)
+    {
+        $key = array_search($included, $this->included, true);
+
+        if ($key !== false) {
+            unset($this->included[$key]);
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
