@@ -58,7 +58,7 @@ class CollectionDocument extends AbstractDocument
             throw new \InvalidArgumentException("Data must be a ResourceObject or ResourceIdentifier");
         }
 
-        if ($this->data === null) {
+        if (null === $this->data) {
             $this->data = array();
         }
 
