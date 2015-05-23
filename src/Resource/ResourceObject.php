@@ -1,9 +1,13 @@
 <?php
 
 namespace Bayer\JsonApi\Resource;
+
 use Bayer\JsonApi\Link\LinkTrait;
 use Bayer\JsonApi\MetaTrait;
 use Bayer\JsonApi\Relationship;
+use Bayer\JsonApi\Relationship\ToOneRelationship;
+use Bayer\JsonApi\Relationship\ToManyRelationship;
+use Bayer\JsonApi\Relationship\AbstractRelationship;
 
 /**
  * Class ResourceObject
@@ -42,7 +46,7 @@ class ResourceObject
     /**
      * Relationships between the resource and other JSON API resources.
      *
-     * @var Relationship[]|null
+     * @var ToOneRelationship[]|ToManyRelationship[]|null
      */
     protected $relationships;
 
@@ -137,6 +141,10 @@ class ResourceObject
             }
         }
 
+        if ($name === 'id' || $name === 'type') {
+            throw new \InvalidArgumentException("The attribute name '$name' is not allowed'");
+        }
+
         if (isset($this->relationships[$name])) {
             throw new \InvalidArgumentException("Attribute name '$name' is invalid as a relationship with the same name already exists'");
         }
@@ -149,7 +157,7 @@ class ResourceObject
     }
 
     /**
-     * @return Relationship[]
+     * @return ToOneRelationship[]|ToManyRelationship[]|null
      */
     public function getRelationships()
     {
@@ -158,7 +166,7 @@ class ResourceObject
 
     /**
      * @param string $name
-     * @return Relationship|null
+     * @return ToOneRelationship|ToManyRelationship|null
      */
     public function getRelationship($name)
     {
@@ -171,12 +179,16 @@ class ResourceObject
 
     /**
      * @param string $name
-     * @param Relationship $value
+     * @param AbstractRelationship $value
      */
-    public function setRelationship($name, Relationship $value)
+    public function setRelationship($name, AbstractRelationship $value)
     {
         if (isset($this->attributes[$name])) {
             throw new \InvalidArgumentException("Relationship name '$name' is invalid as an attribute with the same name already exists'");
+        }
+
+        if ($name === 'id' || $name === 'type') {
+            throw new \InvalidArgumentException("The relationship name '$name' is not allowed'");
         }
 
         if (null === $this->relationships) {
@@ -187,9 +199,9 @@ class ResourceObject
     }
 
     /**
-     * @param Relationship[] $relationships
+     * @param ToOneRelationship[]|ToManyRelationship[]|null $relationships
      */
-    public function setRelationships(array $relationships)
+    public function setRelationships(array $relationships = null)
     {
         $this->relationships = null;
 
@@ -211,5 +223,13 @@ class ResourceObject
         }
 
         return false;
+    }
+
+    /**
+     * Clear relationships
+     */
+    public function clearRelationships()
+    {
+        $this->setRelationships(null);
     }
 }

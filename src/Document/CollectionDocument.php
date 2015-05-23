@@ -16,9 +16,9 @@ class CollectionDocument extends AbstractDocument
     /**
      * The documents primary data
      *
-     * @var ResourceObject[]|ResourceIdentifier[]|null
+     * @var ResourceObject[]|ResourceIdentifier[]|array
      */
-    protected $data;
+    protected $data = array();
 
     /**
      * {@inheritdoc}
@@ -34,7 +34,7 @@ class CollectionDocument extends AbstractDocument
     }
 
     /**
-     * @return ResourceObject[]|ResourceIdentifier[]|null
+     * @return ResourceObject[]|ResourceIdentifier[]|array
      */
     public function getData()
     {
@@ -42,11 +42,15 @@ class CollectionDocument extends AbstractDocument
     }
 
     /**
-     * @param ResourceObject[]|ResourceIdentifier[]|null $data
+     * @param ResourceObject[]|ResourceIdentifier[]|array $data
      */
     public function setData($data)
     {
-        $this->data = $data;
+        $this->data = array();
+
+        foreach ($data as $resource) {
+            $this->addData($resource);
+        }
     }
 
     /**
@@ -58,10 +62,6 @@ class CollectionDocument extends AbstractDocument
             throw new \InvalidArgumentException("Data must be a ResourceObject or ResourceIdentifier");
         }
 
-        if (null === $this->data) {
-            $this->data = array();
-        }
-
         $this->data[] = $data;
     }
 
@@ -70,6 +70,6 @@ class CollectionDocument extends AbstractDocument
      */
     public function clearData()
     {
-        $this->setData(null);
+        $this->setData(array());
     }
 }
