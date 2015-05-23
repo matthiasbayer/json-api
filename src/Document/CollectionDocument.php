@@ -66,6 +66,32 @@ class CollectionDocument extends AbstractDocument
     }
 
     /**
+     * @param ResourceObject|ResourceIdentifier $data
+     * @return bool
+     */
+    public function hasData($data)
+    {
+        return in_array($data, $this->data);
+    }
+
+    /**
+     * @param ResourceObject|ResourceIdentifier $data
+     * @return bool
+     */
+    public function removeData($data)
+    {
+        $key = array_search($data, $this->data, true);
+
+        if ($key !== false) {
+            unset($this->data[$key]);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Clear all data
      */
     public function clearData()
