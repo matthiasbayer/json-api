@@ -1,6 +1,10 @@
 <?php
 
-namespace Bayer\JsonApi;
+namespace Bayer\JsonApi\Document;
+
+use Bayer\JsonApi\Error;
+use Bayer\JsonApi\LinkObject;
+use Bayer\JsonApi\MetaObject;
 
 /**
  * Class Document

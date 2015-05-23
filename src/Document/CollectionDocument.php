@@ -2,7 +2,6 @@
 
 namespace Bayer\JsonApi\Document;
 
-use Bayer\JsonApi\AbstractDocument;
 use Bayer\JsonApi\Resource\ResourceIdentifier;
 use Bayer\JsonApi\Resource\ResourceObject;
 
