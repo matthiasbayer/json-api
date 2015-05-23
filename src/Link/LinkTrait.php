@@ -22,11 +22,7 @@ trait LinkTrait
      */
     public function setLinks(array $links)
     {
-        if (null === $links) {
-            $this->links = null;
-
-            return;
-        }
+        $this->links = null;
 
         foreach ($links as $name => $value) {
             $this->addLink($name, $value);
@@ -58,6 +54,10 @@ trait LinkTrait
 
         if (!is_string($value) && !$value instanceof LinkObject) {
             throw new \InvalidArgumentException("Link value must be either string or LinkObject");
+        }
+
+        if (null === $this->links) {
+            $this->links = array();
         }
 
         $this->links[$name] = $value;
