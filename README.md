@@ -31,6 +31,6 @@ $coming = 'soon';
 Symfony2 Integration
 --------------------
 
-You can use the [JsonApiBundle](https://github.com/matthiasbayer/JsonApiBundle) for fast and
+You can use the [BayerJsonApiBundle](https://github.com/matthiasbayer/BayerJsonApiBundle) for fast and
 easy integration of this library into your Symfony2 project.
 
