@@ -60,6 +60,10 @@ abstract class AbstractDocument
      */
     public function addIncluded(ResourceObject $included)
     {
+        if ($this->hasIncluded($included)) {
+            return;
+        }
+
         if (!is_array($this->included)) {
             $this->included = array();
         }
@@ -73,7 +77,7 @@ abstract class AbstractDocument
      */
     public function hasIncluded(ResourceObject $included)
     {
-        return in_array($included, $this->included);
+        return is_array($this->included) && in_array($included, $this->included);
     }
 
     /**
