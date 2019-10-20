@@ -21,13 +21,6 @@ via Composer:
     
     composer require matthiasbayer/json-api
 
-Standalone usage
-----------------
-
-```php
-$coming = 'soon';
-```
-
 Symfony2 Integration
 --------------------
 
